@@ -69,7 +69,7 @@ padding-left: 55px; }
         <header class="hd">
             <%@ include file="nav.jsp" %>
         </header>
-        <div class="content"> <!--https://blog.naver.com/theshillain73-->
+        <div class="content"> 
             <figure class="vs">
                 <video src="./video/shillaseoul.mp4" autoplay muted class="vdo"></video>
             </figure>

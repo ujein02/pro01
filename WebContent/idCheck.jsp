@@ -29,7 +29,7 @@ line-height: 32px; border-radius:20px; float:left; margin-left:20px; margin-righ
 		var id = f.id.value;
 		id = id.trim();
 		if(id.length<8 || id.length>12){
-			alert("아이디의 글자수는 8자 이상 12자 이하여야 합니다.");
+			alert("아이디의 글자수는 8글자 이상 12글자 이하 이어야 합니다.");
 			return false;
 		}
 	}

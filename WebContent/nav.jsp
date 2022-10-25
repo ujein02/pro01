@@ -5,7 +5,7 @@
 	String name = (String) session.getAttribute("name");
 %>
 <div class="hd_wrap">
-    <a href="" class="logo"><img src="./img/logo.gif" alt="로고"></a>
+    <a href="index.jsp" class="logo"><img src="./img/logo.gif" alt="로고"></a>
     <nav class="tnb">
     <%
     	if(id!=null && id.equals("admin")){
@@ -14,6 +14,7 @@
     		<span class="ip_print"><%=name %>님</span>
     		<a href="memList.jsp">회원관리</a>
     		<a href="boardList.jsp">게시판관리</a>
+    		<a href="faq.jsp">고객문의</a>
 	        <a href="logout.jsp">로그아웃</a>
 	    </div>
     <%
@@ -21,9 +22,10 @@
     %>  
     	<div>
     		<span class="ip_print"><%=name %>님</span>
-	        <a href="logout.jsp">로그아웃</a>
-	        <a href="memInfo.jsp">회원정보</a>
+	        <a href="memberInfo.jsp">회원정보</a>
+	        <a href="boardList.jsp">게시판</a>
 	        <a href="faq.jsp">고객문의</a>
+	        <a href="logout.jsp">로그아웃</a>
         </div>
  	<%
     	} else {
