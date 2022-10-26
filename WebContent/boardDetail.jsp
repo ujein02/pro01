@@ -6,6 +6,15 @@
 	response.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
+	String sid = (String) session.getAttribute("id");
+	
+	int no = Integer.parseInt(request.getParameter("no"));
+	String title = "";
+	String content = "";
+	String uname = "";
+	String resdate = "";
+	String author = "";
+	
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -18,17 +27,35 @@
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select * from boarda";
+		sql = "select a.no no, a.title title, a.content content, ";
+		sql = sql + "b.name name, a.resdate resdate, a.author author ";
+		sql = sql + "from board1 a inner join member1 b ";
+		sql = sql + "on a.author=b.id where a.no=?";
 		pstmt = con.prepareStatement(sql);
-				
+		pstmt.setInt(1, no);
 		rs = pstmt.executeQuery();
+		
+		if(rs.next()){
+			title = rs.getString("title");
+			content = rs.getString("content");
+			uname = rs.getString("name");
+			resdate = rs.getString("resdate");
+			author = rs.getString("author");
+		}
+	} catch(Exception e){
+		e.printStackTrace();
+	} finally {
+		rs.close();
+		pstmt.close();
+		con.close();
+	}
 		
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<%@ include file="head.jsp" %>
-    <link rel="stylesheet" href="./css/reset2.css">
+	<link rel="stylesheet" href="./css/reset2.css">
     <link rel="stylesheet" href="header.css">
     <style>
     /* header.css */
@@ -77,38 +104,38 @@
                 <h2 class="page_title">글 상세보기</h2>
   				<div class="tb_fr">
   					<table class="tb">
-  						<thead>
-  							<tr>
-  								<th>연번</th>
-  								<th>제목</th>
-  								<th>작성자</th>
-  								<th>작성일</th>
-  							</tr>
-  						</thead>
   						<tbody>             
-<%
-		int cnt = 0;
-		while(rs.next()){
-			cnt+=1;
-%>
-			<tr>
-					<td><%=cnt %></td>
-					<td><a href='boardDetail.jsp?no=<%=rs.getString("title") %>'><%=rs.getString("title") %></a></td>
-					<td><%=rs.getString("author") %></td>
-					<td><%=rs.getString("resdate") %></td>
-			</tr>
-<%
-		}
-	} catch(Exception e){
-		e.printStackTrace();
-	} finally {
-		rs.close();
-		pstmt.close();
-		con.close();
-	}
-%>
+							<tr>
+								<th>글 번호</th>
+								<td><%=no %></td>
+							</tr>
+							<tr>
+								<th>제목</th>
+								<td><%=title %></td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td><%=content %></td>
+							</tr>
+							<tr>
+								<th>작성자</th>
+								<td><%=uname %></td>
+							</tr>
+							<tr>
+								<th>작성일</th>
+								<td><%=resdate %></td>
+							</tr>
 						</tbody> 
 					</table>
+					<div class="btn_group">
+						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
+						<%
+							if(sid.equals("admin") || sid.equals(author)) {
+						%>
+						<a href='boardModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
+						<a href='boardDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
+						<% } %>
+					</div>
 				</div>
 			</div>
         </section>

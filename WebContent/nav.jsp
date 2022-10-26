@@ -32,6 +32,7 @@
     %>  
     	<div>
     		<a href="login.jsp">로그인</a>
+    		<a href="boardList.jsp">게시판</a>
 	        <a href="term.jsp">회원가입</a>
 	        <a href="faq.jsp">고객문의</a>
         </div>

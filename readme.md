@@ -9,4 +9,4 @@
 ![물리적 설계1](./img/database/pro01_03.png "물리적 설계1")
 ![물리적 설계2](./img/database/pro01_04.png "물리적 설계2")
 ![클래스 설계](./img/database/pro01_05.png "클래스 설계")
-![기능 설계](./img/database/pro01_05.png "기능 설계")
+![기능 설계](./img/database/pro01_06.png "기능 설계")
