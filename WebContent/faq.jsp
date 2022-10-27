@@ -1,146 +1,143 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, java.sql.*" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
+	
+	int cnt = 0;
+	String sid = (String) session.getAttribute("id");
+	
+%>  
+<%@ include file="connectionPool.conf" %>  
+<%
+	sql = "select * from faqa order by parno asc, gubun asc ";
+	pstmt = con.prepareStatement(sql);
+	rs = pstmt.executeQuery();
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <%@ include file="head.jsp" %>
+	<%@ include file="head.jsp" %>
     <link rel="stylesheet" href="./css/reset2.css">
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="datatables.min.css">
+    <script src="datatables.min.js"></script>
+    <script>
+	$(document).ready( function () {
+	    $('#myTable').DataTable();
+	} );
+	</script>
     <style>
     /* header.css */
-    /* .hd { width: 100%; height:122px; position:absolute; top: 0; left: 0; z-index:91; background-color:}
-    .hd_wrap { width: 1200px; margin: 0 auto; } */
     .hd { position:fixed; }
-   
-    
     /* content */
-    .vs { clear:both; width: 100%; height:300px; overflow: hidden; padding-top: 100px;}
+    .vs { clear:both; width: 100%; height:300px; overflow: hidden; }
     .vs img { display:block; width: 100%; height:auto; }
     .bread { clear:both; width: 100%; line-height: 60px; border-bottom:3px solid #eee; }
     .bread_fr { width: 1200px; margin: 0 auto; }
     .page { clear:both; width: 100%; min-height:100vh;}
     .page:after { content:""; display:block; clear:both; }
     .page_wrap { width: 1200px; margin: 0 auto; }
-    
-    .page_title {  padding-top: 1em; height: 50px; border-bottom:3px solid rgb(198, 180, 142) }
+    .page_title { padding-top: 1em; text-align: center; }
     .home { color:#333; }
-
-    .ir_fr {width: 1200px; white-space: pre-wrap; margin: 0px auto; }
-    .con_img {display: block; }
-    .ir_fr h4, .ir_fr p{clear: both; color:rgb(111, 109, 109);}
-    .ir_fr p{font-size: 13px; line-height: 0.5px;}
-
-    .faq_lst {  width:1200px; float:left; padding-top: 30px; }
-    .faq_lst li { clear:both; height:32px; border-bottom:1px solid rgb(181, 180, 180); box-sizing:border-box; }
-    .faq_lst li:first-child { border-top:1px solid  rgb(181, 180, 180) }
-    .faq_lst li span { display:block; box-sizing:border-box; float:left; line-height: 32px; font-size:14px; }
-    .faq_cat { width: 200px; text-align:center; }
-    .faq_con { width: 900px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:rgb(111, 109, 109); }
     
-    
+    .frm { border:2px solid #333; padding: 24px; width: 1000px; margin:50px auto; }
+    .tb { display:table; margin:40px auto; width:1000px; border-collapse:collapse; }
+    .tb tr { display:table-row; }
+    .tb td, .tb th { display:table-cell; }
+    .tb th { height: 48px; border-bottom:2px solid #333; border-top:2px solid #333; 
+    color:#fff; background-color:rgb(198, 180, 142); font-size:18px; text-align:center; }
+    .tb td { height: 48px; border-bottom:1px solid #333; text-align:center; }
+	.tb tr th:first-child { width:80px; text-align:center; }
+	.tb tr th:nth-child(2) { width:500px; text-align:center; }
+	.tb tr th:nth-child(3) { width:300px; text-align:center; }
+	.tb tr th:nth-child(4) { width:200px; text-align:center; }
+	.tb tr th:last-child { text-align:center; }
+	
+    .btn_group .btn.primary { background-color:#333; color:#fff; min-width:120px; height: 32px; line-height: 32px; border-radius:10px; float:right; margin-top:40px; margin-right:30px; cursor:pointer; text-align:center; }
+	.btn_group .btn.primary:hover { background-color:rgb(198, 180, 142); color:#fff; }
+	
     </style>
     <link rel="stylesheet" href="footer.css">
-    <script>
-        $(document).ready(function(){
-        $(".to_top").attr("href", location.href);
-        $(window).scroll(function(){
-            var ht = $(window).height();
-            var tp = $(this).scrollTop();
-            if(tp>=300){
-                $(".to_top").addClass("on");
-                $(".to_top").attr("href", location.href);
-            } else {
-                $(".to_top").removeClass("on");
-                $(".to_top").attr("href", location.href);
-            }
-        });
-    });    
-    </script>
 </head>
 <body>
-    <div class="wrap">
-        <header class="hd">
-            <%@ include file="nav.jsp" %>
-        </header>
-        <div class="content" > 
-            <figure class="vs">
-                <img src="./img/main.jpg" alt="비주얼">
-            </figure>
-            <div class="bread">
-                <div class="bread_fr">
-                    <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">고객문의</span>
-                </div>
+<div class="wrap">
+    <header class="hd">
+		<%@ include file="nav.jsp" %>
+    </header>
+    <div class="content">
+        <figure class="vs">
+            <img src="./img/main.jpg" alt="비주얼">
+        </figure>
+        <div class="bread">
+            <div class="bread_fr">
+                <a href="index.jsp" class="home">HOME</a> &gt;
+                <span class="sel">자주하는 질문 및 답변</span>
             </div>
-            <section class="page">
-                <div class="page_wrap">
-                    <h2 class="page_title">자주하는 질문</h2>
-                    <ul class="faq_lst">
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.객실 업그레이드 쿠폰은 어떻게 사용하나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.객실 패키지 이용 금액은 포인트 적립 기준이 어떻게 되나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.등급 점수는 어디서 확인이 가능한가요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.로그인이 안됩니다.</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.멤버십 카드(모바일 카드)는 어디서 확인이 가능한가요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.모바일 쿠폰은 어떻게 확인/사용하나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.신라리워즈 멤버십센터의 운영시간은 어떻게 되나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.신라리워즈 포인트 적립은 어떻게 하나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">기타</span>
-                            <span class="faq_con"><a href="">Q.회원 정보 수정은 어떻게 하나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">신라리워즈가입</span>
-                            <span class="faq_con"><a href="">Q.신라리워즈 가입은 어떻게 하나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">신라리워즈가입</span>
-                            <span class="faq_con"><a href="">Q.온라인 계정 활성화 등록과 온라인 가입의 차이점은 무엇인가요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">포인트 적립/사용</span>
-                            <span class="faq_con"><a href="">Q.포인트 적립률은 어떻게 되나요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">포인트 적립/사용</span>
-                            <span class="faq_con"><a href="">Q.포인트가 적립되지 않는 객실 상품은 무엇인가요?</a></span>
-                        </li>
-                        <li>
-                            <span class="faq_cat">포인트 조정</span>
-                            <span class="faq_con"><a href="">Q.[포인트 조정 신청] 포인트 적립이 누락되었습니다.</a></span>
-                        </li>
-                    </ul>    
-                </div>
-            </section>
         </div>
-                    
-        <footer class="ft">
-            <%@ include file="footer.jsp" %>
-        </footer>
+        <section class="page">
+            <div class="page_wrap">
+                <h2 class="page_title">자주하는 질문 및 답변</h2>
+  				<div class="tb_fr">
+  					<table class="tb" id="myTable">
+  						<thead>
+  							<tr>
+  								<th>연번</th>
+  								<th>제목</th>
+  								<th>작성자</th>
+  								<th>작성일</th>
+  							</tr>
+  						</thead>
+  						<tbody>             
+<%
+		
+		while(rs.next()){
+			cnt+=1;
+			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
+			String date = yymmdd.format(rs.getDate("resdate"));
+%>
+			<tr>
+					<td><%=cnt %></td>
+					<% 
+					if(sid!=null) { 
+					%>
+						<td><a href='faqDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></td>
+					<%
+					} else {
+					%> 
+						<td><%=rs.getString("title") %></td>
+					<%
+					}
+					%>
+					<td><%=rs.getString("author") %></td>
+					<td><%=date %></td>
+			</tr>
+			<% 
+			}
+			%>
+			
+<%@ include file="connectionClose.conf" %>				
+
+						</tbody> 
+					</table>
+					<div class="btn_group">
+					<% 
+						if(sid.equals("admin")) { 
+					%>
+						<a href="faqWrite.jsp" class="btn primary">글 쓰기</a>
+					<% 
+						} 
+					%>
+					</div>
+				</div>
+			</div>
+        </section>
     </div>
-    
-    </body>
-    </html>
+    <footer class="ft">
+		<%@ include file="footer.jsp" %>
+    </footer>
+</div>
+</body>
+</html>

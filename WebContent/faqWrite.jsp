@@ -51,14 +51,14 @@
         <div class="bread">
             <div class="bread_fr">
                 <a href="index.jsp" class="home">HOME</a> &gt;
-                <span class="sel">글 쓰기</span>
+                <span class="sel">자주하는 질문 및 답변 글 쓰기</span>
             </div>
         </div>
         <section class="page">
             <div class="page_wrap">
-                <h2 class="page_title">글 쓰기</h2>
+                <h2 class="page_title">자주하는 질문 및 답변 글 쓰기</h2>
   				<div class="frm1">
-  					<form name="frm" action="boardWritePro.jsp" method="post" class="frm">
+  					<form name="frm" action="faqWritePro.jsp" method="post" class="frm">
 	  					<table class="tb">
 	  						<tbody>             
 								<tr>
@@ -81,7 +81,7 @@
 						</table>
 						<div class="btn_group">
 							<button type="submit" class="btn primary">글 쓰기</button>
-							<a href="boardList.jsp" class="btn primary">게시판 목록</a>
+							<a href="faq.jsp" class="btn primary">자주하는 질문 및 답변</a>
 						</div>
 					</form>
 				</div>

@@ -69,12 +69,12 @@
     .page_wrap { width: 1200px; margin: 0 auto; }
     .page_title { padding-top: 1em; text-align: center; }
     .home { color:#333; }
-    .frm1 { padding: 24px; width: 960px; margin:50px auto; }
-    .tb { display:table; margin:40px auto; width:900px; border-collapse:collapse; }
+    .frm1 { padding: 24px; width: 1000px; margin:50px auto; }
+    .tb { display:table; margin:40px auto; width:1000px; border-collapse:collapse; }
     .tb tr { display:table-row; }
     .tb td, .tb th { display:table-cell; }
-    .tb th { height: 48px; border-bottom:1px solid #fff; color:#fff; background-color:#333; 
-    width:150px; box-sizing:border-box; }
+    .tb th { height: 48px; border:1px solid #333; color:#333; background-color:rgb(198, 180, 142); 
+    width:200px; box-sizing:border-box; }
     .tb td { height: 48px; border-bottom:1px solid #333; text-align:left;
      border-right:2px solid #333;
     width:600px; box-sizing:border-box; padding:8px; }
@@ -82,13 +82,9 @@
     .tb tr:first-child td { border-top:2px solid #333; }
     .tb tr:last-child th { border-bottom:2px solid #333; }
     .tb tr:last-child td { border-bottom:2px solid #333; }
-	.btn_group { clear:both; width:580px; margin:20px auto; }
-	.btn_group .btn { display:block; float:left; margin:20px; min-width:100px; padding:8px; font-size:14px;
-	line-height:24px; border-radius:36px; border:2px solid #333; text-align:center; }
-	.btn_group .btn.primary { background-color:#333; color:#fff; }
-	.btn_group .btn.primary:hover { background-color:deepskyblue; }
-	.in_data { display:block; float:left; line-height:36px; padding-left:6px; }
-	textarea { padding:6px; }
+	
+	.btn_group .btn.primary { background-color:#333; color:#fff; min-width:120px; height: 32px; line-height: 32px; border-radius:10px; float:right; margin-top:40px; margin-right:30px; cursor:pointer; text-align:center; }
+	.btn_group .btn.primary:hover { background-color:rgb(198, 180, 142); color:#fff; }
     </style>
     <link rel="stylesheet" href="footer.css">
 </head>
@@ -125,7 +121,7 @@
 								<tr>
 									<th>내용</th>
 									<td>
-										<textarea cols="100" rows="8" name="content" id="content"><%=content %></textarea>
+										<textarea cols="100" rows="20" name="content" id="content"><%=content %></textarea>
 									</td>
 								</tr>
 								<tr>

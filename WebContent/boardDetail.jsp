@@ -70,17 +70,17 @@
     .page_wrap { width: 1200px; margin: 0 auto; }
     .page_title { padding-top: 1em; text-align: center; }
     .home { color:#333; }
-    .frm { border:2px solid #333; padding: 24px; width: 780px; margin:50px auto; }
-    .tb { display:table; margin:40px auto; width:580px; border-collapse:collapse; }
+    
+    .frm { border:2px solid #333; padding: 24px; width: 1000px; margin:50px auto; }
+    .tb { display:table; margin:40px auto; margin-top:60px; width:1000px; border-collapse:collapse; }
     .tb tr { display:table-row; }
     .tb td, .tb th { display:table-cell; }
-    .tb th { height: 48px; border-bottom:2px solid #333; border-top:2px solid #333; 
-    color:#fff; background-color:#333; }
-    .tb td { height: 48px; border-bottom:1px solid #333; text-align:center; }
-	.tb tr th:first-child { width:80px; text-align:center; }
-	.tb tr th:nth-child(2) { width:160px; text-align:center; }
-	.tb tr th:nth-child(3) { width:160px; text-align:center; }
-	.tb tr th:last-child { text-align:center; }
+    .tb th { width:200px; height: 48px; border:1px solid #333; 
+    color:#fff; background-color:rgb(198, 180, 142) }
+    .tb td { height: 48px; border : 1px solid #333; text-align:center; }
+    .btn_group .btn.primary { background-color:#333; color:#fff; min-width:120px; height: 32px; line-height: 32px; border-radius:10px; float:right; margin-top:40px; margin-right:30px; cursor:pointer; text-align:center; }
+	.btn_group .btn.primary:hover { background-color:rgb(198, 180, 142); color:#fff; }
+	
     </style>
     <link rel="stylesheet" href="footer.css">
 </head>

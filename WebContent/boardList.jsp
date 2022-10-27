@@ -4,18 +4,19 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
-	response.setContentType("text/html; charset=UTF-8");
+	response.setContentType("text/html; charset=UTF-8");	//캐릭터셋 설정
 	
-	String sid = (String) session.getAttribute("id");
+	String sid = (String) session.getAttribute("id");		// 세션 접속 중인 아이디 받아오기
 	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	Connection con = null;									// 연결
+	PreparedStatement pstmt = null;							// sql 값 불러오기
+	ResultSet rs = null;									// 결과값 저장할 곳
 	
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String dbid = "system";
 	String dbpw = "1234";
 	String sql = "";
+	
 	int cnt = 0;
 
 	
@@ -57,12 +58,13 @@
     .page_wrap { width: 1200px; margin: 0 auto; }
     .page_title { padding-top: 1em; text-align: center; }
     .home { color:#333; }
+    
     .frm { border:2px solid #333; padding: 24px; width: 1000px; margin:50px auto; }
     .tb { display:table; margin:40px auto; width:1000px; border-collapse:collapse; }
     .tb tr { display:table-row; }
     .tb td, .tb th { display:table-cell; }
     .tb th { height: 48px; border-bottom:2px solid #333; border-top:2px solid #333; 
-    color:#fff; background-color:#333; }
+    color:#fff; background-color:rgb(198, 180, 142); font-size:18px; text-align:center; }
     .tb td { height: 48px; border-bottom:1px solid #333; text-align:center; }
 	.tb tr th:first-child { width:80px; text-align:center; }
 	.tb tr th:nth-child(2) { width:500px; text-align:center; }
@@ -70,8 +72,8 @@
 	.tb tr th:nth-child(4) { width:200px; text-align:center; }
 	.tb tr th:last-child { text-align:center; }
 	
-    .btn_group .btn primary {  background-color:#333; color:#fff; }
-    .btn_group .btn primary:hover { background-color: #fff; color: #333; }
+    .btn_group .btn.primary { background-color:#333; color:#fff; min-width:120px; height: 32px; line-height: 32px; border-radius:10px; float:right; margin-top:40px; margin-right:30px; cursor:pointer; text-align:center; }
+	.btn_group .btn.primary:hover { background-color:rgb(198, 180, 142); color:#fff; }
 	
     </style>
     <link rel="stylesheet" href="footer.css">

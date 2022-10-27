@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String sid = (String) session.getAttribute("id");%>
+<% String uid = (String) session.getAttribute("id");%>
 <%@ include file="connectionPool.conf" %>
 <%	
 	request.setCharacterEncoding("UTF-8");
@@ -41,7 +41,8 @@
 </head>
 <body>
 <header class="hd">
-<%@ include file="nav.jsp" %>
+
+
 </header>
 <div class="page">
 	<table class="tb">
@@ -70,7 +71,7 @@
 	</table>
 	<div class="btn_group">
 	<a href="boardList.jsp" class="btn_primary">게시판 목록</a>
-	<% if(sid.equals("admin") || sid.equals(author)){ %>
+	<% if(uid.equals("admin") || uid.equals(author)){ %>
 	<a href='boardModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
 	<a href='boardDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
 	<%} %>
