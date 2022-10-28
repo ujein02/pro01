@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*, java.util.* " %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
@@ -77,6 +77,10 @@
 	.tb tr th:nth-child(2) { width:160px; text-align:center; }
 	.tb tr th:nth-child(3) { width:160px; text-align:center; }
 	.tb tr th:last-child { text-align:center; }
+	
+	.btn_group .btn.primary { background-color:#333; color:#fff; min-width:120px; height: 32px; line-height: 32px; border-radius:10px; float:right; margin-top:40px; margin-right:30px; cursor:pointer; text-align:center; padding-left:10px; padding-right:10px;}
+	.btn_group .btn.primary:hover { background-color:rgb(198, 180, 142); color:#fff; }
+	
     </style>
     <link rel="stylesheet" href="footer.css">
 </head>
@@ -92,12 +96,12 @@
         <div class="bread">
             <div class="bread_fr">
                 <a href="index.jsp" class="home">HOME</a> &gt;
-                <span class="sel">회원목록</span>
+                <span class="sel">회원정보</span>
             </div>
         </div>
         <section class="page">
             <div class="page_wrap">
-                <h2 class="page_title">회원목록</h2>
+                <h2 class="page_title">회원정보</h2>
   				<div class="tb_fr">
   					<table class="tb">
   						<tbody>             
@@ -127,7 +131,9 @@
 							</tr>
 						</tbody> 
 					</table>
-					<a href="memList.jsp">회원 목록</a>
+					<div class="btn_group">
+						<a href="memList.jsp" class="btn primary">회원 목록</a>
+					</div>
 				</div>
 			</div>
         </section>

@@ -14,7 +14,8 @@
     		<span class="ip_print"><%=name %>님</span>
     		<a href="memList.jsp">회원관리</a>
     		<a href="boardList.jsp">게시판관리</a>
-    		<a href="faq.jsp">고객문의</a>
+    		<a href="faq.jsp">faq</a>
+    		<a href="qna.jsp">qna</a>
 	        <a href="logout.jsp">로그아웃</a>
 	    </div>
     <%
@@ -24,7 +25,9 @@
     		<span class="ip_print"><%=name %>님</span>
 	        <a href="memberInfo.jsp">회원정보</a>
 	        <a href="boardList.jsp">게시판</a>
-	        <a href="faq.jsp">고객문의</a>
+	        <a href="faq.jsp">faq</a>
+    		<a href="qna.jsp">qna</a>
+    		<a href="online.jsp">질문하기</a>
 	        <a href="logout.jsp">로그아웃</a>
         </div>
  	<%

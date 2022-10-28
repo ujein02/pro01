@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, java.sql.*" %>
+<%@ page import="java.util.*, java.sql.*,  java.text.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
@@ -9,13 +9,15 @@
 	int cnt = 0;
 	String sid = (String) session.getAttribute("id");
 	if(sid==null){
-		sid="guset";
+		sid="guest";
 	}
+	
+	
 	
 %>  
 <%@ include file="connectionPool.conf" %>  
 <%
-	sql = "select * from faqa order by parno asc, gubun asc ";
+	sql = "select * from qnaa order by parno desc, lev asc ";
 	pstmt = con.prepareStatement(sql);
 	rs = pstmt.executeQuery();
 %>
@@ -77,12 +79,12 @@
         <div class="bread">
             <div class="bread_fr">
                 <a href="index.jsp" class="home">HOME</a> &gt;
-                <span class="sel">자주하는 질문 및 답변</span>
+                <span class="sel">질문 및 답변 목록</span>
             </div>
         </div>
         <section class="page">
             <div class="page_wrap">
-                <h2 class="page_title">자주하는 질문 및 답변</h2>
+                <h2 class="page_title">질문 및 답변 목록</h2>
   				<div class="tb_fr">
   					<table class="tb" id="myTable">
   						<thead>
@@ -97,18 +99,65 @@
 <%
 		
 		while(rs.next()){
-			cnt+=1;
 			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 			String date = yymmdd.format(rs.getDate("resdate"));
 %>
 			<tr>
-					<td><%=cnt %></td>
+					
 					<td>
-					<% if(rs.getInt("gubun")==0) { %>
-						<a href='faqDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a>
-					<% } else { %>
-						<a href='faqDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:36px;"><%=rs.getString("title") %></a>
-					<% } %>
+					<% if(rs.getInt("lev")==0) { 
+						cnt++;
+						out.println("<span>"+cnt+"</span>");
+						}
+					
+					%>
+					</td>
+					<td>
+					<% 
+						if(rs.getInt("lev")==0) {
+							if(rs.getString("sec").equals("Y")) {
+								if(sid.equals(rs.getString("author")) || sid.equals("admin")){
+					%>
+									<a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' class="sec1"><%=rs.getString("title") %></a>
+					<%
+								} else {
+					%>	
+									<span class="sec1"><%=rs.getString("title") %></span>
+					<%
+								}
+							} else if(rs.getString("sec").equals("N") && sid!="guest"){
+					%>	
+									<a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a>
+					<%
+							} else {
+					%>	
+									<span><%=rs.getString("title") %></span>
+					<%
+							}
+					%>
+					<% 
+						} else {
+							if(rs.getString("sec").equals("Y")) {
+								if(sid.equals(rs.getString("author")) || sid.equals("admin")){
+					%>
+									<a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;" class="sec2"><%=rs.getString("title") %></a>
+					<%
+								} else {
+					%>
+									<span style="padding-left:60px;" class="sec2"><%=rs.getString("title") %></span>				
+					<%
+								}		
+							} else if(rs.getString("sec").equals("N") && sid!="guest"){
+					%>
+								<a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;"><%=rs.getString("title") %></a>						
+					<%
+							} else {
+					%>
+						 		<span style="padding-left:60px;"><%=rs.getString("title") %></span>
+					<%
+							}
+						} 
+					%>
 					</td>
 					<td><%=rs.getString("author") %></td>
 					<td><%=date %></td>
@@ -122,13 +171,11 @@
 						</tbody> 
 					</table>
 					<div class="btn_group">
-					<% 
-						if(sid.equals("admin")) { 
-					%>
-						<a href="faqWrite.jsp" class="btn primary">글 쓰기</a>
-					<% 
-						} 
-					%>
+						<% if(sid!="guest") { %>
+						<a href="qnaWrite.jsp" class="btn primary">질문 하기</a>
+						<% } else { %>
+						<p style="clear:both;">회원가입 후 로그인 하셔야 질문 및 답변을 보실 수 있습니다.</p>
+						<% } %>
 					</div>
 				</div>
 			</div>

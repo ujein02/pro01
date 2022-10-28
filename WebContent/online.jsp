@@ -51,40 +51,69 @@
         <div class="bread">
             <div class="bread_fr">
                 <a href="index.jsp" class="home">HOME</a> &gt;
-                <span class="sel">자주하는 질문 및 답변 글 쓰기</span>
+                <span class="sel">질문하기</span>
             </div>
         </div>
         <section class="page">
             <div class="page_wrap">
-                <h2 class="page_title">자주하는 질문 및 답변 글 쓰기</h2>
+                <h2 class="page_title">질문하기</h2>
+                <p style="clear:both">작성하여 보내신 내용은 관리자 이메일로 보내지며, 내용을 확인 후 별도 개별적으로 3일 이내 연락드립니다.</p>
+						<%@ include file="connectionPool.conf" %>
+						<%
+						sql = "select * from member1 where id=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, sid);
+						
+						rs = pstmt.executeQuery();
+						
+						
+						if(rs.next()){
+							
+						%>
   				<div class="frm1">
-  					<form name="frm" action="faqWritePro.jsp" method="post" class="frm">
+  					<form name="frm" action="onlinePro.jsp" method="post" class="frm">
 	  					<table class="tb">
 	  						<tbody>             
 								<tr>
-									<th>제목</th>
-									<td><input type="text" name="title" id="title" class="in_data" required /></td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td>
-										<textarea cols="120" rows="20" name="content" id="content"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<th>작성자</th>
-									<td><%=sid %>
-									<input type="hidden" name="author" id="author" value="<%=sid %>">  
-									</td>
-								</tr>
-							</tbody> 
+									<th><label for="author">작성자명</label></th>
+								<td>
+									<input type="text" name="name" id="name" class="in_data" value='<%=rs.getString("name") %>' required>
+								</td>
+							</tr>
+							<tr>
+								<th><label for="from">이메일 주소</label></th>
+								<td>
+									<input type="email" name="from" id="from" class="in_data" value='<%=rs.getString("email") %>' required >
+								</td>
+							</tr>
+							<tr>
+								<th><label for="tel">연락처</label></th>
+								<td>
+									<input type="tel" name="tel" id="tel" class="in_data" value='<%=rs.getString("tel") %>' required >
+								</td>
+							</tr>
+							<tr>
+								<th><label for="title">상담 제목</label></th>
+								<td><input type="text" name="title" id="title" placeholder="제목 입력" class="in_data" required></td>
+							</tr>
+							<tr>
+								<th><label for="content">상담 내용</label></th>
+								<td>
+									<textarea cols="100" rows="6" name="content" id="content" class="in_data2"></textarea>
+								</td>
+							</tr>
+						</tbody>
 						</table>
 						<div class="btn_group">
-							<button type="submit" class="btn primary">글 쓰기</button>
-							<a href="faq.jsp" class="btn primary">자주하는 질문 및 답변 목록</a>
+							<button type="submit" class="btn primary">제출하기</button>
+							<a href="qna.jsp" class="btn primary">Q&A 목록</a>
 						</div>
 					</form>
 				</div>
+				<%
+				}
+				%>
+			<%@ include file="connectionClose.conf" %>
 			</div>
         </section>
     </div>
