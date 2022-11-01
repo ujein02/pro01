@@ -30,9 +30,7 @@
     <link rel="stylesheet" href="datatables.min.css">
     <script src="datatables.min.js"></script>
     <script>
-	$(document).ready( function () {
-	    $('#myTable').DataTable();
-	} );
+	
 	</script>
     <style>
     /* header.css */

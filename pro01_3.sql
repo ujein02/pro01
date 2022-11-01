@@ -4,8 +4,8 @@ title varchar2(100)	not null,
 content	varchar2(600),	
 author	varchar2(16),	
 resdate	date	default sysdate,
-gubun number not null,       -- ����(0) / �亯(1) ����
-parno number not null        -- ����(1)�� �亯(1)�� ���� ��ȣ
+gubun number not null,       -- 질문(0)/답변(1) 구분
+parno number not null        -- 질문(1)과 답변(1)의 공통 번호
 );
 
 create sequence fseq;

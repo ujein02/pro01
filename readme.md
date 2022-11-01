@@ -13,3 +13,7 @@
 ![DB ERD](./img/database/pro01_07.png)
 ![회원가입 시퀀스](./img/database/pro01_08.png)
 ![로그인 시퀀스](./img/database/pro01_09.png)
+
+## 기능 구현
+![메인페이지](./img/pro01_1.png "메인페이지 첫 번째")
+![로그인페이지](./img/pro01_2.png "로그인 페이지")
