@@ -63,81 +63,78 @@
                 <h2 class="page_title">회원정보수정</h2>
                 <%@ include file="connectionPool.conf" %>
                 <%
-				sql = "select * from member1 where no=?";
+				sql = "select * from member1 where id=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, no);
+				pstmt.setString(1, sid);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
-			%>
-  				<div class="frm1">
-  					<form name="frm" action="memEditPro.jsp" method="post" onsubmit="return joinAlert(this)>
-	  					<table class="tb">
-	  						<tbody>
-							<tr>
-								<th><label for="id">아이디</label></th>
-								<td>
-									<input type="text" name="id" id="id" class="in_data" value='<%=rs.getString("id") %>' readonly required>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="pw">비밀번호</label></th>
-								<td>
-									<input type="password" name="pw" id="pw" class="in_data" value='<%=rs.getString("pw") %>' placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="pw2">비밀번호 확인</label></th>
-								<td>
-									<input type="password" name="pw2" id="pw2" class="in_data"  placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="name">회원명</label></th>
-								<td>
-									<input type="text" name="name" id="name" class="in_data" value='<%=rs.getString("name") %>' placeholder="한글 이름 입력" pattern="\[^(가-힣)]\" required>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="from">이메일 주소</label></th>
-								<td>
-									<input type="email" name="email" id="email" class="in_data" value='<%=rs.getString("email") %>' pattern=".+@naver\.com" placeholder="네이버 이메일 주소를 입력" required >
-								</td>
-							</tr>
-							<tr>
-								<th><label for="tel">연락처</label></th>
-								<td>
-									<input type="tel" name="tel" id="tel" class="in_data" value='<%=rs.getString("tel") %>' pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required >
-								</td>
-							</tr>
-						</tbody> 
-						</table>
 					
-				
-						<div class="btn_group">
-							<button type="submit" class="btn primary">회원 정보 수정</button>
-							<button type="reset" class="btn primary">취소</a>
-						</div>
-					</form>
-					 
-					 <script>
-	            function joinAlert(f){
-	            	if(f.pw.value!=f.pw2.value){
-	            		alert("비밀번호와 비밀번호 확인이 서로 일치 하지 않습니다.");
-	            		return false;
-	            	}
-	            }
-	            </script>
-			</div>
-			
-			<%@ include file="connectionClose.conf" %>
-		</div>
+					%>
+					<div class="frm1">
+						<form name="frm" class="frm" action="memModifyPro.jsp" method="post" onsubmit="return joinAlert(this)">
+							<table class="tb">
+								<tbody>
+									<tr>
+										<th><label for="id">아이디</label></th>
+										<td>
+											<input type="text" name="id" id="id" class="in_data" value='<%=rs.getString("id") %>' readonly required>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="pw">비밀번호</label></th>
+										<td>
+											<input type="password" name="pw" id="pw" class="in_data" value='<%=rs.getString("pw") %>' placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="pw2">비밀번호 확인</label></th>
+										<td>
+											<input type="password" name="pw2" id="pw2" class="in_data"  placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="name">회원명</label></th>
+										<td>
+											<input type="text" name="name" id="name" class="in_data" value='<%=rs.getString("name") %>' placeholder="한글 이름 입력" pattern="\[^(가-힣)]\" required>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="from">이메일 주소</label></th>
+										<td>
+											<input type="email" name="email" id="email" class="in_data" value='<%=rs.getString("email") %>' pattern=".+@naver\.com" placeholder="네이버 이메일 주소를 입력" required >
+										</td>
+									</tr>
+									<tr>
+										<th><label for="tel">연락처</label></th>
+										<td>
+											<input type="tel" name="tel" id="tel" class="in_data" value='<%=rs.getString("tel") %>' pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required >
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="btn_group">
+								<button type="submit" class="btn primary">회원 정보 수정</button>
+								<button type="reset" class="btn primary">취소</button>
+							</div>
+						</form>
+			            <script>
+			            function joinAlert(f){
+			            	if(f.pw.value!=f.pw2.value){
+			            		alert("비밀번호와 비밀번호 확인이 서로 일치 하지 않습니다.");
+			            		return false;
+			            	}
+			            }
+			            </script>
+					</div>
+					<%
+					}
+					%>
+					<%@ include file="connectionClose.conf" %>
 				</div>
-			</div>
-        </section>
-    </div>
-    <footer class="ft">
-		<%@ include file="footer.jsp" %>
-    </footer>
-</div>
-</body>
-</html>
+			</section>
+		</div>
+		<footer class="ft">
+			<%@ include file="footer.jsp" %>
+		</footer>
+		</body>
+		</html>
